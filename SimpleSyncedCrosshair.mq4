@@ -16,10 +16,7 @@ int OnInit()
 //--- indicator buffers mapping
    IndicatorSetString(INDICATOR_SHORTNAME,"MT4ProfessionalSimpleSyncedCrosshair");
    ChartSetInteger(0, CHART_EVENT_MOUSE_MOVE, true);
-   ChartSetInteger(0, CHART_EVENT_OBJECT_CREATE, true);
-   ChartSetInteger(0, CHART_EVENT_OBJECT_DELETE, true);
-   ChartNavigate(0,CHART_END,0);
-   Setup();
+   SetupLines();
 //---
    return(INIT_SUCCEEDED);
   }
@@ -57,7 +54,7 @@ void OnChartEvent(const int id,
 //+------------------------------------------------------------------+
 
 
-void Setup(){
+void SetupLines(){
    ObjectDelete(0, "MT4ProfessionalSimpleVLine");
 	ObjectCreate(0, "MT4ProfessionalSimpleVLine", OBJ_VLINE, 0, TimeGMT(), 0);
 	ObjectSetInteger(0, "MT4ProfessionalSimpleVLine", OBJPROP_COLOR, clrBlue);
