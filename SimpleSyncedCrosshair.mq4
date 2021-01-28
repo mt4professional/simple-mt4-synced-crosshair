@@ -55,20 +55,20 @@ void OnChartEvent(const int id,
 
 
 void SetupLines(){
-   ObjectDelete(0, "MT4ProfessionalSimpleVLine");
-	ObjectCreate(0, "MT4ProfessionalSimpleVLine", OBJ_VLINE, 0, TimeGMT(), 0);
-	ObjectSetInteger(0, "MT4ProfessionalSimpleVLine", OBJPROP_COLOR, clrBlue);
-	ObjectSetInteger(0, "MT4ProfessionalSimpleVLine", OBJPROP_STYLE, STYLE_DASH);
-	ObjectSetInteger(0, "MT4ProfessionalSimpleVLine", OBJPROP_WIDTH, 1);
-	ObjectSetInteger(0, "MT4ProfessionalSimpleVLine", OBJPROP_SELECTABLE, false);
-	ObjectSetString(0, "MT4ProfessionalSimpleVLine", OBJPROP_TOOLTIP, "\n");
-	ObjectDelete(0, "MT4ProfessionalSimpleHLine");
-	ObjectCreate(0, "MT4ProfessionalSimpleHLine", OBJ_HLINE, 0, TimeGMT(), SymbolInfoDouble(Symbol(),SYMBOL_BID));
-	ObjectSetInteger(0, "MT4ProfessionalSimpleHLine", OBJPROP_COLOR, clrBlue);
-	ObjectSetInteger(0, "MT4ProfessionalSimpleHLine", OBJPROP_STYLE, STYLE_DASH);
-	ObjectSetInteger(0, "MT4ProfessionalSimpleHLine", OBJPROP_WIDTH, 1);
-	ObjectSetInteger(0, "MT4ProfessionalSimpleHLine", OBJPROP_SELECTABLE	, false);
-	ObjectSetString(0, "MT4ProfessionalSimpleHLine", OBJPROP_TOOLTIP, "\n");
+    ObjectDelete(0, "MT4ProfessionalSimpleVLine");
+    ObjectCreate(0, "MT4ProfessionalSimpleVLine", OBJ_VLINE, 0, TimeGMT(), 0);
+    ObjectSetInteger(0, "MT4ProfessionalSimpleVLine", OBJPROP_COLOR, clrBlue);
+    ObjectSetInteger(0, "MT4ProfessionalSimpleVLine", OBJPROP_STYLE, STYLE_DASH);
+    ObjectSetInteger(0, "MT4ProfessionalSimpleVLine", OBJPROP_WIDTH, 1);
+    ObjectSetInteger(0, "MT4ProfessionalSimpleVLine", OBJPROP_SELECTABLE, false);
+    ObjectSetString(0, "MT4ProfessionalSimpleVLine", OBJPROP_TOOLTIP, "\n");
+    ObjectDelete(0, "MT4ProfessionalSimpleHLine");
+    ObjectCreate(0, "MT4ProfessionalSimpleHLine", OBJ_HLINE, 0, TimeGMT(), SymbolInfoDouble(Symbol(),SYMBOL_BID));
+    ObjectSetInteger(0, "MT4ProfessionalSimpleHLine", OBJPROP_COLOR, clrBlue);
+    ObjectSetInteger(0, "MT4ProfessionalSimpleHLine", OBJPROP_STYLE, STYLE_DASH);
+    ObjectSetInteger(0, "MT4ProfessionalSimpleHLine", OBJPROP_WIDTH, 1);
+    ObjectSetInteger(0, "MT4ProfessionalSimpleHLine", OBJPROP_SELECTABLE    , false);
+    ObjectSetString(0, "MT4ProfessionalSimpleHLine", OBJPROP_TOOLTIP, "\n");
 }
 
 void MoveCrossHair(const int id,
@@ -84,13 +84,13 @@ void MoveCrossHair(const int id,
    int      window=0;
 
    if(ChartXYToTimePrice(0,x,y,window,dt,price))
-	{
+    {
 
-   	long currentChart = ChartFirst();
+       long currentChart = ChartFirst();
       while(currentChart >= 0){
          if(currentChart >= 0 && ObjectFind("MT4ProfessionalSimpleVLine") >= 0){
             ObjectMove(currentChart,"MT4ProfessionalSimpleVLine",0,dt,0);
-      	   ObjectMove(currentChart,"MT4ProfessionalSimpleHLine",0,0,price);
+            ObjectMove(currentChart,"MT4ProfessionalSimpleHLine",0,0,price);
             if(currentChart != ChartID()){
                int BarBack = (int)(-iBarShift( ChartSymbol(currentChart), ChartPeriod(currentChart), dt, false) + ChartGetInteger(currentChart,CHART_VISIBLE_BARS)/2);
                ChartNavigate(currentChart,CHART_END,BarBack);
@@ -99,5 +99,5 @@ void MoveCrossHair(const int id,
          }
          currentChart = ChartNext(currentChart);
       }
-	}
+    }
 }
