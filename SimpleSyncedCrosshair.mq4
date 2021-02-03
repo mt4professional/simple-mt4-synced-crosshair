@@ -49,7 +49,7 @@ void OnChartEvent(const int id,
                   const string &sparam)
   {
 //---
-   MoveCrossHair(id,lparam,dparam,sparam);
+    MoveCrossHair(id,lparam,dparam,sparam);
   }
 //+------------------------------------------------------------------+
 
@@ -75,29 +75,29 @@ void MoveCrossHair(const int id,
                   const long &lparam,
                   const double &dparam,
                   const string &sparam){
-   if(id != CHARTEVENT_MOUSE_MOVE) return;
+    if(id != CHARTEVENT_MOUSE_MOVE) return;
 
-   int x = (int)lparam;
-   int y = (int)dparam;
-   datetime dt    =0;
-   double   price =0;
-   int      window=0;
+    int x = (int)lparam;
+    int y = (int)dparam;
+    datetime dt    =0;
+    double   price =0;
+    int      window=0;
 
-   if(ChartXYToTimePrice(0,x,y,window,dt,price))
+    if(ChartXYToTimePrice(0,x,y,window,dt,price))
     {
 
-       long currentChart = ChartFirst();
-      while(currentChart >= 0){
-         if(currentChart >= 0 && ObjectFind("MT4ProfessionalSimpleVLine") >= 0){
-            ObjectMove(currentChart,"MT4ProfessionalSimpleVLine",0,dt,0);
-            ObjectMove(currentChart,"MT4ProfessionalSimpleHLine",0,0,price);
-            if(currentChart != ChartID()){
-               int BarBack = (int)(-iBarShift( ChartSymbol(currentChart), ChartPeriod(currentChart), dt, false) + ChartGetInteger(currentChart,CHART_VISIBLE_BARS)/2);
-               ChartNavigate(currentChart,CHART_END,BarBack);
+        long currentChart = ChartFirst();
+        while(currentChart >= 0){
+            if(currentChart >= 0 && ObjectFind("MT4ProfessionalSimpleVLine") >= 0){
+                ObjectMove(currentChart,"MT4ProfessionalSimpleVLine",0,dt,0);
+                ObjectMove(currentChart,"MT4ProfessionalSimpleHLine",0,0,price);
+                if(currentChart != ChartID()){
+                    int BarBack = (int)(-iBarShift( ChartSymbol(currentChart), ChartPeriod(currentChart), dt, false) + ChartGetInteger(currentChart,CHART_VISIBLE_BARS)/2);
+                    ChartNavigate(currentChart,CHART_END,BarBack);
+                }
+                ChartRedraw(currentChart);
             }
-            ChartRedraw(currentChart);
-         }
-         currentChart = ChartNext(currentChart);
-      }
+            currentChart = ChartNext(currentChart);
+        }
     }
 }
