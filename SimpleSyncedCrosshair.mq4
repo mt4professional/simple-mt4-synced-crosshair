@@ -8,6 +8,7 @@
 #property version   "1.00"
 #property strict
 #property indicator_chart_window
+#property indicator_plots 0
 //+------------------------------------------------------------------+
 //| Custom indicator initialization function                         |
 //+------------------------------------------------------------------+
@@ -88,7 +89,7 @@ void MoveCrossHair(const int id,
 
         long currentChart = ChartFirst();
         while(currentChart >= 0){
-            if(currentChart >= 0 && ObjectFind("MT4ProfessionalSimpleVLine") >= 0){
+            if(currentChart >= 0 && ObjectFind(0, "MT4ProfessionalSimpleVLine") >= 0){
                 ObjectMove(currentChart,"MT4ProfessionalSimpleVLine",0,dt,0);
                 ObjectMove(currentChart,"MT4ProfessionalSimpleHLine",0,0,price);
                 if(currentChart != ChartID()){
